@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_pass
+      WORDPRESS_BD_NAME: wordpress
+    ports:
+     - "82:80"
+    networks:
+    - redDocker
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: wordpress_pass
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+    - redDocker
+
+networks:
+  redDocker:
+###No necesitamos especificar ningun driver concreto

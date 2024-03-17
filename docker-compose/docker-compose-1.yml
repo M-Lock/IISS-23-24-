@@ -1,0 +1,31 @@
+version: '2'
+
+services: 
+  drupal:
+    image: drupal
+    restart: always 
+    ports:
+###El puerto 81 del host debe ser el que se conecte a drupal
+      - "81:80"
+    volumes:
+      - datos_drupal:/var/www/html
+    environment:
+###Estas variables no son obligatorias, pero son usadas si queremos configurar la base de datos de mysql
+      MYSQL_HOST: mysql
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+
+  mysql:
+    image: mysql
+    volumes:
+      - datos_mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+
+volumes:
+  datos_mysql:
+  datos_drupal:
