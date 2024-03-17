@@ -1,3 +1,4 @@
 *.md
 !README.md
 !LICENSE.md
+!docker-compose/explicacion-compose.md
